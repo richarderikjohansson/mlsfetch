@@ -1,0 +1,20 @@
+[project]
+name = "mlsfetch"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Richard Johansson", email = "richard.johansson@irf.se" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "earthaccess>=0.14.0",
+    "numpy>=2.3.2",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+mlsfetch = "mlsfetch.main:auth"
