@@ -25,7 +25,3 @@ def auth():
     assert edl.authenticated, "Login failed, look into credentials"
     shell = MLSRuntime(edl=edl)
     shell.cmdloop()
-
-
-#if __name__ == "__main__":
-#    auth()

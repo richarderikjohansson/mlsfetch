@@ -2,6 +2,7 @@ import cmd
 from .main import earthaccess
 from pathlib import Path
 from datetime import datetime
+from .log import get_download_logger, get_runtime_logger
 
 PRODUCT = {
     "O3": "ML2O3",
@@ -12,7 +13,7 @@ PRODUCT = {
     "ClO": "ML2ClO",
     "HNO3": "ML2HNO3",
     "HOCl": "ML2HOCl",
-    "T": "ML2T"
+    "T": "ML2T",
 }
 
 
@@ -22,13 +23,15 @@ class MLSRuntime(cmd.Cmd):
         self.username = edl.username
         self.auth = edl.authenticated
         self.prompt = f"{self.username}: "
-        self.intro = f"Welcome {self.username} to MLS search and download tool. Type help or ? to list commands\n"
+        self.rlogger = get_runtime_logger()
+        self.intro = f"Welcome {
+            self.username
+        } to MLS search and download tool. Type help or ? to list commands\n"
 
     def do_exit(self, arg):
         "Exit MLS search and download tool"
 
-        # logging, instead?
-        print(f"Thank you and goodbye {self.username}")
+        self.rlogger.info(f"Exiting for {self.username}")
         return True
 
     def do_search(self, arg):
@@ -43,6 +46,7 @@ class MLSRuntime(cmd.Cmd):
         ClO
         HNO3
         HOCl
+        T
 
         positional argument:
         product    Product to search after
@@ -52,29 +56,33 @@ class MLSRuntime(cmd.Cmd):
 
         self.product = args[0]
         self.year = args[1]
-        self.short_name = check_product(product=self.product)
+        self.short_name = check_product(product=self.product, logger=self.rlogger)
 
         if self.year == "__all__":
-            temporal = ("2004")
+            temporal = "2004"
         else:
-            check_year(self.year)
+            check_year(self.year, self.rlogger)
             temporal = (self.year, self.year)
 
+        self.rlogger.info(f"Started search for {self.product}")
         self.results = earthaccess.search_data(
             short_name=self.short_name,
             version="005",
             temporal=temporal,
             bounding_box=(-180, -82, 180, 82),  # global coverage
-            count=-1
+            count=-1,
         )
 
     def do_list(self, arg):
         if hasattr(self, "results"):
-            dsets = earthaccess.open(self.results)
-            for ds in dsets:
-                print(ds)
+            for granule in self.results:
+                nativeid = granule["meta"]["native-id"]
+                file = nativeid.split(":")[-1]
+                self.rlogger.info(file)
         else:
-            print("You need to search for data before listing them. See help search")
+            self.rlogger.error(
+                "You need to search for data before listing them. See 'help search'"
+            )
 
     def do_download(self, arg):
         """
@@ -83,21 +91,30 @@ class MLSRuntime(cmd.Cmd):
         if hasattr(self, "results"):
             home = Path.home()
             savedir = home / "MLS" / self.product
-            earthaccess.download(self.results, local_path=savedir)
+            dlogger = get_download_logger(home / "MLS")
+            files = earthaccess.download(self.results, local_path=savedir)
+
+            dlogger.info("Downloaded:\n")
+            for file in files:
+                dlogger.info(file)
         else:
-            print("You need to search for data before downloading. See 'help download'")
+            self.rlogger.error(
+                "You need to search for data before downloading. See 'help download'"
+            )
 
 
-def check_year(year):
+def check_year(year, logger):
     try:
         datetime.strptime(year, "%Y")
     except ValueError:
-        print("Check year, has to be for example '2024' for 2024")
+        logger.error("Check format of 'year', has to be YYYY")
 
 
-def check_product(product):
+def check_product(product, logger):
     try:
         short_name = PRODUCT[product]
         return short_name
     except KeyError:
-        print(f"'{product}' is not a MLS product. Type 'help search' to see the products")
+        logger.error(
+            f"'{product}' is not a MLS product. Type 'help search' to see the products"
+        )
