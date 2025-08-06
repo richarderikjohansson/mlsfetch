@@ -67,12 +67,9 @@ data from 2020:
 ```bash
 search O3 2020
 ```
-if you instead would like to search for all available Ozone data replace the year with *__all__*.
-To list all the files found in the search type:
 
-```bash
-list
-```
+if you instead would like to search for all available Ozone data replace the year with *__all__*.
+To list all the files found in the search type `list` in the prompt
 
 In the table below you can see the currently available products that `mlsfetch` can find.
 
@@ -88,20 +85,19 @@ In the table below you can see the currently available products that `mlsfetch` 
 | Chlorine Monoxide    | ML2ClO.005   | Level 2 Chlorine Monoxide                | ClO      |
 | Hypochlorous Acid    | ML2HOCl.005  | Level 2 Hypochlorous Acid                | HOCl     |
 
-### Download data
+### Download data and exiting
 
 To download the data you first have to search for the data as explained in the section above. To save it 
-locally you simply type:
+locally you simply type `download` in the prompt.
 
-```bash
-download
-```
 >>> [!warning] Download directory
 
 As currently configured, the data will be downloaded into a directory named *MLS* located in your home directory. 
 Please ensure that you do not already have a directory with that name that you wish to preserve. Future versions
 of this software will allow users to specify a custom download location.
 >>>
+
+To exit the software simply type `exit` in the prompt
 
 
 
