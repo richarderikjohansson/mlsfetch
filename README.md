@@ -52,9 +52,10 @@ to log in:
 ```bash
 mlsfetch login --persist
 ```
-[!warning]
+>>> [!warning] Saving credentials
 When using `--persist` will a .netrc file be created in your home directory. This file will contain your login
 credentials in plain text.
+>>>
 
 ### Search for data
 
@@ -95,11 +96,12 @@ locally you simply type:
 ```bash
 download
 ```
-[!warning]
+>>> [!warning] Download directory
 
 As currently configured, the data will be downloaded into a directory named *MLS* located in your home directory. 
 Please ensure that you do not already have a directory with that name that you wish to preserve. Future versions
 of this software will allow users to specify a custom download location.
+>>>
 
 
 
