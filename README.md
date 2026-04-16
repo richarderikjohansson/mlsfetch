@@ -52,8 +52,8 @@ to log in:
 ```bash
 mlsfetch login --persist
 ```
-[!CAUTION]
-When using `--persist` will a .netrc file be created in your home directory. This file will contain your login
+> [!CAUTION]
+> When using `--persist` will a .netrc file be created in your home directory. This file will contain your login
 credentials in plain text.
 
 ### Search for data
