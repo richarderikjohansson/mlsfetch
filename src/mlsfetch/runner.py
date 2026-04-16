@@ -5,15 +5,17 @@ from datetime import datetime
 from .log import get_download_logger, get_runtime_logger
 
 PRODUCT = {
-    "O3": "ML2O3",
-    "H2O": "ML2H2O",
-    "CO": "ML2CO",
-    "CH3CN": "ML2CH3CN",
-    "N2O": "ML2N2O",
-    "ClO": "ML2ClO",
-    "HNO3": "ML2HNO3",
-    "HOCl": "ML2HOCl",
-    "T": "ML2T",
+    "ML2O3": "ML2O3",
+    "ML2H2O": "ML2H2O",
+    "ML2N2O": "ML2N2O",
+    "ML2ClO": "ML2ClO",
+    "ML2HNO3": "ML2HNO3",
+    "ML2T": "ML2T",
+    "ML2DMP": "ML2EDMPGEOS5294",
+    "ML3DBO3": "ML3DBO3",
+    "ML3DBH2O": "ML3DBH2O",
+    "ML3DBN2O": "ML3DBN2O",
+    "ML3DBClO": "ML3DBClO",
 }
 
 
@@ -38,15 +40,17 @@ class MLSRuntime(cmd.Cmd):
         """
         Search for MLS datasets.
         Products available:
-        O3
-        H2O
-        CO
-        CH3CN
-        N2O
-        ClO
-        HNO3
-        HOCl
-        T
+        ML2O3
+        ML2H2O
+        ML2N2O
+        ML2ClO
+        ML2HNO3
+        ML2T
+        ML2DMP
+        ML3DBO3
+        ML3DBN2O
+        ML3DBH2O
+        ML3DBClO
 
         positional argument:
         product    Product to search after
