@@ -68,22 +68,9 @@ data from 2020:
 search O3 2020
 ```
 
-if you instead would like to search for all available Ozone data replace the year with *__all__*.
+If you instead would like to search for all available Ozone data replace the year with *__all__*.
 To list all the files found in the search type `list` in the prompt
 
-In the table below you can see the currently available products that `mlsfetch` can find.
-
-| Data Product         | Short Name   | Description                              | Argument |
-|----------------------|--------------|------------------------------------------|----------|
-| Temperature          | ML2T.005     | Level 2 Temperature                      | T        |
-| Ozone (O₃)           | ML2O3.005    | Level 2 Ozone                            | O3       |
-| Water Vapor (H₂O)    | ML2H2O.005   | Level 2 Water Vapor                      | H2O      |
-| Carbon Monoxide (CO) | ML2CO.005    | Level 2 Carbon Monoxide                  | CO       |
-| Acetonitrile (CH₃CN) | ML2CH3CN.005 | Level 2 Acetonitrile                     | CH3CN    |
-| Nitrous Oxide (N₂O)  | ML2N2O.005   | Level 2 Nitrous Oxide                    | N2O      |
-| Nitric Acid (HNO₃)   | ML2HNO3.005  | Level 2 Nitric Acid                      | HNO3     |
-| Chlorine Monoxide    | ML2ClO.005   | Level 2 Chlorine Monoxide                | ClO      |
-| Hypochlorous Acid    | ML2HOCl.005  | Level 2 Hypochlorous Acid                | HOCl     |
 
 ### Download data and exiting
 
@@ -98,13 +85,3 @@ of this software will allow users to specify a custom download location.
 >>>
 
 To exit the software simply type `exit` in the prompt
-
-
-
-
-
-
-
-
-
-
