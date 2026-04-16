@@ -75,8 +75,8 @@ To list all the files found in the search type `list` in the prompt
 To download the data you first have to search for the data as explained in the section above. To save it 
 locally you simply type `download` in the prompt.
 
-[!CAUTION]
-As currently configured, the data will be downloaded into a directory named *MLS* located in your home directory. 
+> [!CAUTION]
+> As currently configured, the data will be downloaded into a directory named *MLS* located in your home directory. 
 Please ensure that you do not already have a directory with that name that you wish to preserve. Future versions
 of this software will allow users to specify a custom download location.
 
